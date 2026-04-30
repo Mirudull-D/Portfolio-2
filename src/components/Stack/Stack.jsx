@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './Stack.module.css';
 
@@ -34,14 +33,6 @@ const strips = [
 ];
 
 const MarqueeStrip = ({ strip }) => {
-  const itemMarkup = strip.items.map((item, i) => (
-    <span key={i} className={`${styles.stripItem} ${strip.outlined ? styles.outlined : ''}`}>
-      {item}
-    </span>
-  ));
-
-  const separator = <span className={styles.stripSeparator}>·</span>;
-
   const list = [
     ...strip.items.flatMap((item, i) => [
       <span key={`a-${i}`} className={`${styles.stripItem} ${strip.outlined ? styles.outlined : ''}`}>{item}</span>,
@@ -70,10 +61,6 @@ export default function Stack() {
       <div className={styles.stackBlock}>
         <div className={styles.header}>
           <div className={styles.label}>TOOLS &amp; THINKING</div>
-          <div className={styles.liveIndicator}>
-            <div className={styles.liveDot} />
-            <span className={styles.liveText}>LIVE</span>
-          </div>
         </div>
         <div className={`${styles.stripBlock} ${isVisible ? styles.revealed : ''}`}>
           {strips.map((strip, i) => (

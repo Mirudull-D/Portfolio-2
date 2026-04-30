@@ -1,4 +1,7 @@
 .stack {
+  width: 100vw;
+  height: 100vh;
+  margin-left: calc(-50vw + 50%);
   background: var(--bg-dark);
   padding: 0;
   position: relative;
@@ -13,18 +16,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 64px 48px 32px;
+  padding: 48px 48px 24px;
   background: var(--bg-dark);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
 }
 
 .label {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.4;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 6rem);
+  letter-spacing: 0.05em;
   color: #FFF;
+  opacity: 0.9;
 }
 
 .liveIndicator {
@@ -42,8 +45,15 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
 .liveText {
@@ -71,28 +81,26 @@
 
 .strip {
   width: 100%;
-  height: 88px;
+  height: 140px;
   overflow: hidden;
   display: flex;
   align-items: center;
   position: relative;
+  cursor: default;
 }
 
-.strip::before {
+.strip::after {
   content: '';
   position: absolute;
   inset: 0;
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
+  z-index: 1;
 }
 
-.strip:hover::before {
+.strip:hover::after {
   opacity: 1;
-}
-
-.strip:hover .stripTrack {
-  animation-play-state: paused;
 }
 
 .strip.left .stripTrack {
@@ -101,6 +109,10 @@
 
 .strip.right .stripTrack {
   animation: scrollRight var(--speed) linear infinite;
+}
+
+.strip:hover .stripTrack {
+  animation-play-state: paused !important;
 }
 
 .stripTrack {
@@ -112,33 +124,43 @@
 }
 
 @keyframes scrollLeft {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes scrollRight {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 .stripItem {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 3.5rem;
   font-weight: 900;
-  padding: 0 28px;
+  padding: 0 32px;
   line-height: 1;
   letter-spacing: 0.02em;
 }
 
 .stripItem.outlined {
-  -webkit-text-stroke: 1.5px #FFF;
+  -webkit-text-stroke: 2px #FFF;
   color: transparent;
 }
 
 .stripSeparator {
   font-family: var(--font-display);
-  font-size: 2rem;
-  padding: 0 28px;
+  font-size: 3.5rem;
+  padding: 0 32px;
   line-height: 1;
   opacity: 0.4;
 }
@@ -156,8 +178,8 @@
   color: var(--bg-dark);
 }
 
-.strip1::before {
-  background: rgba(255, 255, 255, 0.06);
+.strip1::after {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* Strip 2 — Backend — Red */
@@ -169,8 +191,8 @@
   color: #FFF;
 }
 
-.strip2::before {
-  background: rgba(255, 255, 255, 0.06);
+.strip2::after {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* Strip 3 — Language — Off-white */
@@ -186,8 +208,8 @@
   color: var(--bg-dark);
 }
 
-.strip3::before {
-  background: rgba(0, 0, 0, 0.03);
+.strip3::after {
+  background: rgba(0, 0, 0, 0.04);
 }
 
 /* Strip 4 — Infrastructure — Black */
@@ -203,8 +225,8 @@
   color: var(--riso-yellow);
 }
 
-.strip4::before {
-  background: rgba(255, 255, 255, 0.06);
+.strip4::after {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 @media (max-width: 768px) {
@@ -212,17 +234,17 @@
     padding: 48px 24px 24px;
   }
 
+  .strip {
+    height: 80px;
+  }
+
   .stripItem {
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding: 0 16px;
   }
 
   .stripSeparator {
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding: 0 16px;
-  }
-
-  .strip {
-    height: 64px;
   }
 }
