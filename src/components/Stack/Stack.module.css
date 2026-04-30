@@ -1,16 +1,24 @@
 .stack {
+  background: var(--bg-dark);
+  padding: 0;
   position: relative;
-  background-color: var(--bg-dark);
-  color: #FFF;
-  padding-top: 120px;
-  padding-bottom: 80px;
-  min-height: 100vh;
+  overflow: hidden;
+}
+
+.stack-block {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 64px 48px 32px;
+  background: var(--bg-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .label {
-  position: absolute;
-  top: 48px;
-  left: 48px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.2em;
@@ -19,64 +27,202 @@
   color: #FFF;
 }
 
-.rows {
-  width: 100%;
-}
-
-.row {
-  width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 32px 48px;
+.liveIndicator {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 16px;
+  align-items: center;
+  gap: 8px;
 }
 
-.categoryName {
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--riso-cyan);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.liveText {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #FFF;
+  opacity: 0.3;
+}
+
+.stripBlock {
+  width: 100%;
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  transition: clip-path 0.65s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.stripBlock.revealed {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stripBlock {
+    clip-path: none;
+  }
+}
+
+.strip {
+  width: 100%;
+  height: 88px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.strip:hover::before {
+  opacity: 1;
+}
+
+.strip:hover .stripTrack {
+  animation-play-state: paused;
+}
+
+.strip.left .stripTrack {
+  animation: scrollLeft var(--speed) linear infinite;
+}
+
+.strip.right .stripTrack {
+  animation: scrollRight var(--speed) linear infinite;
+}
+
+.stripTrack {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  width: max-content;
+  padding: 0;
+}
+
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.stripItem {
   font-family: var(--font-display);
-  font-size: clamp(4vw, 6vw, 7vw);
+  font-size: 2rem;
+  font-weight: 900;
+  padding: 0 28px;
   line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.stripItem.outlined {
+  -webkit-text-stroke: 1.5px #FFF;
+  color: transparent;
+}
+
+.stripSeparator {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  padding: 0 28px;
+  line-height: 1;
+  opacity: 0.4;
+}
+
+/* Strip 1 — Frontend — Cyan */
+.strip1 {
+  background: var(--riso-cyan);
+}
+
+.strip1 .stripItem {
+  color: var(--bg-dark);
+}
+
+.strip1 .stripSeparator {
+  color: var(--bg-dark);
+}
+
+.strip1::before {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Strip 2 — Backend — Red */
+.strip2 {
+  background: var(--riso-red);
+}
+
+.strip2 .stripSeparator {
   color: #FFF;
 }
 
-.techList {
-  font-family: var(--font-display);
-  font-size: clamp(4vw, 6vw, 7vw);
-  line-height: 1;
-  text-align: right;
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0;
+.strip2::before {
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.techFilled {
-  /* Filled with the specified color */
+/* Strip 3 — Language — Off-white */
+.strip3 {
+  background: var(--bg-light);
 }
 
-.techOutlined {
-  -webkit-text-stroke: 1.5px currentColor;
-  -webkit-text-fill-color: transparent;
+.strip3 .stripItem {
+  color: var(--bg-dark);
 }
 
-.dot {
-  color: rgba(255, 255, 255, 0.3);
-  margin: 0 0.3em;
+.strip3 .stripSeparator {
+  color: var(--bg-dark);
+}
+
+.strip3::before {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Strip 4 — Infrastructure — Black */
+.strip4 {
+  background: var(--bg-dark);
+}
+
+.strip4 .stripItem {
+  color: var(--riso-yellow);
+}
+
+.strip4 .stripSeparator {
+  color: var(--riso-yellow);
+}
+
+.strip4::before {
+  background: rgba(255, 255, 255, 0.06);
 }
 
 @media (max-width: 768px) {
-  .row {
-    flex-direction: column;
-    padding: 24px 24px;
-    gap: 8px;
+  .header {
+    padding: 48px 24px 24px;
   }
-  .techList {
-    text-align: left;
-    font-size: clamp(6vw, 8vw, 10vw);
+
+  .stripItem {
+    font-size: 1.5rem;
+    padding: 0 16px;
   }
-  .categoryName {
-    font-size: clamp(6vw, 8vw, 10vw);
+
+  .stripSeparator {
+    font-size: 1.5rem;
+    padding: 0 16px;
+  }
+
+  .strip {
+    height: 64px;
   }
 }
