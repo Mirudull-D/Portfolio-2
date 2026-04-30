@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './Work.module.css';
 
@@ -81,7 +81,7 @@ const ProjectBlock = ({ project, index }) => {
 export default function Work() {
   return (
     <section className={styles.work}>
-      <div className={styles.label}>SELECTED WORK</div>
+      <div className={styles.label}>PROJECTS</div>
       <div className={styles.projectsList}>
         {projects.map((p, i) => (
           <ProjectBlock key={p.name} project={p} index={i} />

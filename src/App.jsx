@@ -3,7 +3,7 @@ import Hero from './components/Hero/Hero';
 import Work from './components/Work/Work';
 import About from './components/About/About';
 import Stack from './components/Stack/Stack';
-import Process from './components/Process/Process';
+import Experience from './components/Experience/Experience';
 import Contact from './components/Contact/Contact';
 import './index.css';
 
@@ -29,7 +29,7 @@ function App() {
         <Work />
         <About />
         <Stack />
-        <Process />
+        <Experience />
         <Contact />
       </main>
     </>
