@@ -1,0 +1,76 @@
+.process {
+  position: relative;
+  background-color: var(--bg-light);
+  color: var(--bg-dark);
+  min-height: 100vh;
+}
+
+.phaseBlock {
+  position: relative;
+  width: 100%;
+  padding: 64px 48px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s cubic-bezier(0.76, 0, 0.24, 1),
+              transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.phaseBlock.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phaseBlock {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.phaseName {
+  position: relative;
+  z-index: 1;
+  line-height: 0.9;
+}
+
+.numberWatermark {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(12vw, 18vw, 20vw);
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+  opacity: 0.04;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.phaseDesc {
+  margin-top: 24px;
+  padding-left: 4vw;
+  position: relative;
+  z-index: 1;
+}
+
+.phaseDesc p {
+  line-height: 1.8;
+  opacity: 0.6;
+  max-width: 640px;
+}
+
+@media (max-width: 768px) {
+  .phaseBlock {
+    padding: 48px 24px;
+  }
+  .numberWatermark {
+    right: 24px;
+  }
+  .phaseDesc {
+    padding-left: 0;
+  }
+}

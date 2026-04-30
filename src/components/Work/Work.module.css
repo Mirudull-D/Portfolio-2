@@ -1,0 +1,90 @@
+.work {
+  position: relative;
+  background-color: var(--bg-dark);
+  color: #FFF;
+  padding-top: 120px;
+  min-height: 100vh;
+}
+
+.label {
+  position: absolute;
+  top: 48px;
+  left: 48px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  color: #FFF;
+}
+
+.projectsList {
+  width: 100%;
+}
+
+.block {
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 40px 48px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1),
+              transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.block.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.filled {
+  font-weight: 900;
+  color: #FFF;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.desc {
+  max-width: 60%;
+}
+
+.desc p {
+  line-height: 1.7;
+  opacity: 0.55;
+  color: #FFF;
+}
+
+.tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: var(--riso-yellow);
+}
+
+.tags > div {
+  margin-bottom: 4px;
+}
+
+@media (max-width: 768px) {
+  .details {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .desc {
+    max-width: 100%;
+  }
+  .tags {
+    align-items: flex-start;
+  }
+}
