@@ -6,7 +6,7 @@ export default function Contact() {
     <section className={styles.contact}>
       <div className={styles.center}>
         <h2 className={styles.heading}>
-          <span className={`${styles.line1} outlined-text`}>LET'S</span>
+          <span className={styles.line1}>LET'S</span>
           <br />
           <span 
             className={`${styles.line2} misregister`}
