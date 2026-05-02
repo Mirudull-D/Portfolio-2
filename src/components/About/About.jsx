@@ -1,6 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './About.module.css';
+
+function Counter({ target, suffix = '' }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const duration = 1500;
+    const start = performance.now();
+
+    const animate = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+  }, [target]);
+
+  return (
+    <span>
+      {count}{suffix}
+    </span>
+  );
+}
 
 export default function About() {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
@@ -34,6 +59,27 @@ export default function About() {
             or hunting for the perfect dosa at 2 AM in Besant Nagar. The hunger for 
             precision carries over.
           </p>
+        </div>
+      </div>
+
+      <div className={`${styles.statsRow} ${isVisible ? styles.statsVisible : ''}`}>
+        <div className={styles.stat}>
+          <div className={styles.statNumber}>
+            <Counter target={3} suffix="+" />
+          </div>
+          <div className="label-text" style={{ opacity: 0.5 }}>YEARS EXPERIENCE</div>
+        </div>
+        <div className={styles.stat}>
+          <div className={styles.statNumber}>
+            <Counter target={12} suffix="+" />
+          </div>
+          <div className="label-text" style={{ opacity: 0.5 }}>PROJECTS BUILT</div>
+        </div>
+        <div className={styles.stat}>
+          <div className={styles.statNumber}>
+            <Counter target={2} />
+          </div>
+          <div className="label-text" style={{ opacity: 0.5 }}>ROLES HELD</div>
         </div>
       </div>
 

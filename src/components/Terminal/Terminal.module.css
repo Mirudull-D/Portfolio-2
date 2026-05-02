@@ -1,0 +1,70 @@
+.terminal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.closing {
+  clip-path: inset(0 100% 0 0);
+}
+
+.terminalBlock {
+  width: 90%;
+  max-width: 600px;
+  padding: 32px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 2;
+}
+
+.line {
+  color: var(--riso-cyan);
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--riso-cyan);
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.prompt {
+  color: var(--riso-cyan);
+}
+
+.input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFF;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  flex: 1;
+  caret-color: var(--riso-cyan);
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .terminalBlock {
+    width: 100%;
+    padding: 24px;
+    font-size: 0.75rem;
+  }
+}

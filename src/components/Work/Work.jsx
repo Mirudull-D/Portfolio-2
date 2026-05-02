@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './Work.module.css';
 
@@ -53,7 +53,7 @@ const projects = [
   }
 ];
 
-const ProjectBlock = ({ project, index, isOpen, onToggle }) => {
+const ProjectBlock = ({ project, index, isActive, onClick }) => {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
   
   const isEven = index % 2 === 1;
@@ -62,7 +62,7 @@ const ProjectBlock = ({ project, index, isOpen, onToggle }) => {
   return (
     <article 
       ref={ref}
-      className={`${styles.block} ${isVisible ? styles.visible : ''} ${isOpen ? styles.isOpen : ''}`}
+      className={`${styles.block} ${isVisible ? styles.visible : ''} ${isActive ? styles.isOpen : ''}`}
       style={{ transitionDelay: `${index * 80}ms` }}
     >
       <div className={styles.rowHeader}>
@@ -76,7 +76,7 @@ const ProjectBlock = ({ project, index, isOpen, onToggle }) => {
             '--misregister-color': 'var(--riso-red)'
           }}
           data-text={project.name}
-          onClick={onToggle}
+          onClick={() => onClick(index)}
         >
           {project.name}
         </h2>
@@ -92,46 +92,52 @@ const ProjectBlock = ({ project, index, isOpen, onToggle }) => {
           ))}
         </div>
       </div>
-
-      <div className={`${styles.drawer} ${isOpen ? styles.drawerOpen : ''}`}>
-        <div className={styles.drawerContent}>
-          <div className={styles.drawerGrid}>
-            <div className={styles.drawerLeft}>
-              <div className="label-text" style={{ opacity: 0.3, marginBottom: 8 }}>PROJECT</div>
-              <p className="body-text">{project.desc}</p>
-              <div className={styles.meta} style={{ marginTop: 16 }}>
-                <span className="label-text" style={{ opacity: 0.3 }}>2024 · WEB APP</span>
-              </div>
-            </div>
-            <div className={styles.drawerRight}>
-              <div className="label-text" style={{ opacity: 0.3, marginBottom: 12 }}>STACK</div>
-              <div className={styles.drawerTags}>
-                {project.tags.map(tag => (
-                  <span key={tag} className="label-text">{tag}</span>
-                ))}
-              </div>
-              <div className={styles.drawerButtons}>
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.outlineBtn}>
-                  LIVE ↗
-                </a>
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className={styles.outlineBtn}>
-                  GITHUB ↗
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </article>
   );
 };
 
 export default function Work() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [panelVisible, setPanelVisible] = useState(false);
+  const overlayRef = useRef(null);
+  const panelRef = useRef(null);
 
-  const handleToggle = (index) => {
-    setOpenIndex(prev => prev === index ? null : index);
+  const openPanel = (index) => {
+    setActiveIndex(index);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setPanelVisible(true);
+      });
+    });
   };
+
+  const closePanel = () => {
+    setPanelVisible(false);
+    setTimeout(() => {
+      setActiveIndex(null);
+    }, 500);
+  };
+
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape' && activeIndex !== null) {
+        closePanel();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [activeIndex]);
+
+  useEffect(() => {
+    if (activeIndex !== null) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [activeIndex]);
+
+  const project = activeIndex !== null ? projects[activeIndex] : null;
 
   return (
     <section className={styles.work} id="work">
@@ -142,11 +148,65 @@ export default function Work() {
             key={p.name} 
             project={p} 
             index={i}
-            isOpen={openIndex === i}
-            onToggle={() => handleToggle(i)}
+            isActive={activeIndex === i}
+            onClick={openPanel}
           />
         ))}
       </div>
+
+      {activeIndex !== null && project && (
+        <>
+          <div 
+            ref={overlayRef}
+            className={`${styles.overlay} ${panelVisible ? styles.overlayVisible : ''}`} 
+            onClick={closePanel} 
+          />
+          <div 
+            ref={panelRef}
+            className={`${styles.panel} ${panelVisible ? styles.panelOpen : ''}`}
+          >
+            <button className={styles.closeBtn} onClick={closePanel} aria-label="Close panel">
+              ×
+            </button>
+            <div className={styles.panelContent}>
+              <div className={styles.panelHeader}>
+                <span className="label-text" style={{ opacity: 0.3 }}>
+                  {String(activeIndex + 1).padStart(2, '0')}
+                </span>
+                <h2 className={styles.panelName}>{project.name}</h2>
+              </div>
+
+              <img
+                src={`https://picsum.photos/480/270?random=${activeIndex + 1}`}
+                alt={project.name}
+                className={styles.panelImage}
+              />
+
+              <p className="body-text" style={{ opacity: 0.7, lineHeight: 1.8 }}>
+                {project.desc}
+              </p>
+
+              <div className={styles.panelStack}>
+                <div className="label-text" style={{ opacity: 0.3, marginBottom: 12 }}>STACK</div>
+                <div className={styles.panelTags}>
+                  {project.tags.map(tag => (
+                    <span key={tag} className="label-text">{tag}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.panelLinks}>
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.outlineBtn}>
+                  LIVE ↗
+                </a>
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className={styles.outlineBtn}>
+                  GITHUB ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 }
