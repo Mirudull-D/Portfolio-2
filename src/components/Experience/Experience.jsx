@@ -43,7 +43,7 @@ export default function Experience() {
             SYSTEMS
           </h2>
           <div className={styles.roleTitle}>FULLSTACK DEVELOPER INTERN</div>
-          <div className={styles.duration}>2025 — PRESENT</div>
+          <div className={styles.duration}>MAR 2025 — PRESENT</div>
           <p className={styles.description}>
             Building production full stack systems at Cexnea Systems across frontend and backend.
           </p>

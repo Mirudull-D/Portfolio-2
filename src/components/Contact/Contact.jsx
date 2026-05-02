@@ -18,16 +18,16 @@ export default function Contact() {
         </h2>
 
         <a 
-          href="mailto:mirudull@gmail.com" 
+          href="mailto:d.mirudull@gmail.com"
           className={`${styles.email} interactive-text`}
           style={{ '--strike-color': 'var(--riso-green)' }}
         >
-          mirudull@gmail.com
+          d.mirudull@gmail.com
         </a>
 
         <div className={styles.links}>
           <a 
-            href="https://github.com/mirudull" 
+            href="https://github.com/Mirudull-D" 
             target="_blank" 
             rel="noopener noreferrer"
             className={styles.socialLink}
@@ -35,7 +35,7 @@ export default function Contact() {
             GITHUB
           </a>
           <a 
-            href="https://linkedin.com/in/mirudull" 
+            href="https://www.linkedin.com/in/mirudull-d" 
             target="_blank" 
             rel="noopener noreferrer"
             className={styles.socialLink}

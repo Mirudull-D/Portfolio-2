@@ -37,6 +37,9 @@ export default function Terminal({ onClose }) {
       } else {
         setInput('');
       }
+    } else if (e.key === 'Escape') {
+      setClosing(true);
+      setTimeout(onClose, 600);
     }
   };
 

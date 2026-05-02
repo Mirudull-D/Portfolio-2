@@ -4,46 +4,28 @@ import styles from './Work.module.css';
 
 const projects = [
   {
-    name: 'SYNTHESIS',
-    desc: 'A decentralized protocol for verifiable AI model training. Reduces compute overhead by 40% while maintaining cryptographic proofs of work.',
-    tags: ['React', 'Solidity', 'WebGL', 'TypeScript'],
-    liveUrl: '#',
-    githubUrl: '#'
+    name: 'BNPL DECISION ENGINE',
+    desc: 'High-performance 2-stage credit decision engine for Buy Now Pay Later services. Isolation Forest fraud gate → Logistic Regression pre-qualification (~2ms) → XGBoost final decision with SHAP explanations. P99 latency: ~670ms, well within 2s SLA.',
+    tags: ['Python', 'XGBoost', 'FastAPI', 'Scikit-learn', 'SHAP'],
+    githubUrl: 'https://github.com/Mirudull-D/BNPL-ML-Pipeline'
   },
   {
-    name: 'NEXUS BROWSER',
-    desc: 'An experimental spatial interface for navigating dense information graphs. Built entirely on the Canvas API with a custom physics engine.',
-    tags: ['Vite', 'Canvas API', 'Rust', 'WASM'],
-    liveUrl: '#',
-    githubUrl: '#'
+    name: 'KIRO PRO',
+    desc: 'WhatsApp-native AI business OS for Indian SMBs. Handles orders in any language, voice notes via Whisper, image analysis via Llama Vision. Auto-generates GST invoices, processes Razorpay payments, syncs to Google Sheets.',
+    tags: ['Node.js', 'TypeScript', 'PostgreSQL', 'Groq LLM', 'Prisma'],
+    githubUrl: 'https://github.com/Mirudull-D/Kiro'
   },
   {
-    name: 'ECHO CHAMBER',
-    desc: 'Audio analysis tool for acoustic room modeling. Features real-time spectral decomposition and impulse response generation.',
-    tags: ['Next.js', 'WebAudio API', 'Python', 'FastAPI'],
-    liveUrl: '#',
-    githubUrl: '#'
+    name: 'GIOM',
+    desc: 'Full-featured E-commerce mobile app built with React Native + Expo Router. Complete shopping flow — onboarding, auth, product discovery, cart, checkout, orders, profile. Modular architecture with Context API state management and custom hooks.',
+    tags: ['React Native', 'Expo Router', 'TypeScript', 'Context API', 'Axios'],
+    githubUrl: 'https://github.com/Mirudull-D/Giom_front-end'
   },
   {
-    name: 'VANTAGE POINT',
-    desc: 'A lightweight observability dashboard for distributed microservices. Aggregates logs, metrics, and traces into a single pane of glass.',
-    tags: ['Vue', 'Go', 'Prometheus', 'Redis'],
-    liveUrl: '#',
-    githubUrl: '#'
-  },
-  {
-    name: 'CHRONOS',
-    desc: 'Time-series database visualization engine capable of rendering millions of data points smoothly without downsampling.',
-    tags: ['React', 'D3.js', 'Java', 'Spring Boot'],
-    liveUrl: '#',
-    githubUrl: '#'
-  },
-  {
-    name: 'KINETIC',
-    desc: 'Open-source animation library for performant micro-interactions. Used by over 10,000 developers worldwide.',
-    tags: ['Vanilla JS', 'CSS', 'Rollup', 'Jest'],
-    liveUrl: '#',
-    githubUrl: '#'
+    name: 'SERVESYNC',
+    desc: 'Production-ready restaurant ordering backend. Customer authentication, order management with Prisma transactions for atomic consistency, kitchen dashboard APIs, full order status lifecycle — PLACED → PREPARING → READY → COMPLETED.',
+    tags: ['Express.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'JWT', 'Zod'],
+    githubUrl: 'https://github.com/Mirudull-D/ServeSync'
   }
 ];
 
@@ -178,9 +160,6 @@ export default function Work() {
               </div>
 
               <div className={styles.panelLinks}>
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className={styles.outlineBtn}>
-                  LIVE ↗
-                </a>
                 <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className={styles.outlineBtn}>
                   GITHUB ↗
                 </a>

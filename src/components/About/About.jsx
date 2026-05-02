@@ -86,7 +86,7 @@ export default function About() {
       <div className={styles.metaStrip}>
         <span>BASED IN <span className={styles.green}>CHENNAI</span></span>
         <span className={styles.separator}>·</span>
-        <span>EST. 2022</span>
+        <span>D MIRUDULL</span>
         <span className={styles.separator}>·</span>
         <span>FULL STACK</span>
         <span className={styles.separator}>·</span>
