@@ -45,9 +45,11 @@ const MarqueeStrip = ({ strip }) => {
   ];
 
   return (
-    <div className={`${styles.strip} ${styles[strip.direction]} ${strip.className}`} style={{ '--speed': strip.speed }}>
-      <div className={styles.stripTrack}>
-        {list}
+    <div className={styles.stripWrapper}>
+      <div className={`${styles.strip} ${styles[strip.direction]} ${strip.className}`} style={{ '--speed': strip.speed }}>
+        <div className={styles.stripTrack}>
+          {list}
+        </div>
       </div>
     </div>
   );
@@ -57,7 +59,7 @@ export default function Stack() {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
 
   return (
-    <section className={styles.stack} ref={ref}>
+    <section className={styles.stack} ref={ref} id="stack">
       <div className={styles.stackBlock}>
         <div className={styles.header}>
           <div className={styles.label}>TOOLS &amp; THINKING</div>

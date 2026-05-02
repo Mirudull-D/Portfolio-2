@@ -3,7 +3,7 @@ import styles from './Contact.module.css';
 
 export default function Contact() {
   return (
-    <section className={styles.contact}>
+    <section className={styles.contact} id="contact">
       <div className={styles.center}>
         <h2 className={styles.heading}>
           <span className={styles.line1}>LET'S</span>
@@ -30,8 +30,7 @@ export default function Contact() {
             href="https://github.com/mirudull" 
             target="_blank" 
             rel="noopener noreferrer"
-            className={`${styles.socialLink} interactive-text label-text`}
-            style={{ '--strike-color': 'var(--riso-green)' }}
+            className={styles.socialLink}
           >
             GITHUB
           </a>
@@ -39,8 +38,7 @@ export default function Contact() {
             href="https://linkedin.com/in/mirudull" 
             target="_blank" 
             rel="noopener noreferrer"
-            className={`${styles.socialLink} interactive-text label-text`}
-            style={{ '--strike-color': 'var(--riso-green)' }}
+            className={styles.socialLink}
           >
             LINKEDIN
           </a>

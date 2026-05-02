@@ -13,7 +13,7 @@ export default function Experience() {
   }, [isVisible]);
 
   return (
-    <section className={styles.experience} ref={ref}>
+    <section className={styles.experience} ref={ref} id="experience">
       <div className={styles.header}>
         <div className={styles.label}>EXPERIENCE</div>
         <div className={styles.rightLabel}>02 ROLES · ONGOING</div>

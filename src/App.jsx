@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Hero from './components/Hero/Hero';
 import Work from './components/Work/Work';
 import About from './components/About/About';
 import Stack from './components/Stack/Stack';
 import Experience from './components/Experience/Experience';
 import Contact from './components/Contact/Contact';
+import ScrollProgress from './components/ScrollProgress/ScrollProgress';
 import './index.css';
 
 const Grain = () => (
@@ -21,9 +22,14 @@ const Grain = () => (
 );
 
 function App() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Grain />
+      <ScrollProgress />
       <main>
         <Hero />
         <Work />

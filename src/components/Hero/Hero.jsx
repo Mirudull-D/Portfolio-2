@@ -11,7 +11,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} id="hero">
       <div className={styles.label}>
         FULLSTACK DEVELOPER
       </div>

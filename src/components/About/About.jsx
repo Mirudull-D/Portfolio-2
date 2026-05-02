@@ -6,7 +6,7 @@ export default function About() {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
 
   return (
-    <section className={styles.about} ref={ref}>
+    <section className={styles.about} ref={ref} id="about">
       <div className={styles.watermark}>ABOUT</div>
 
       <div className={`${styles.content} ${isVisible ? styles.visible : ''}`}>
