@@ -62,20 +62,25 @@ const ProjectBlock = ({ project, index, isOpen, onToggle }) => {
   return (
     <article 
       ref={ref}
-      className={`${styles.block} ${isVisible ? styles.visible : ''}`}
+      className={`${styles.block} ${isVisible ? styles.visible : ''} ${isOpen ? styles.isOpen : ''}`}
       style={{ transitionDelay: `${index * 80}ms` }}
     >
-      <h2 
-        className={`interactive-text display-m ${nameStyle} ${project.misregister ? 'misregister' : ''}`}
-        style={{
-          '--strike-color': 'var(--riso-red)',
-          '--misregister-color': 'var(--riso-red)'
-        }}
-        data-text={project.name}
-        onClick={onToggle}
-      >
-        {project.name}
-      </h2>
+      <div className={styles.rowHeader}>
+        <span className={`${styles.projectNum} label-text`} style={{ opacity: 0.6 }}>
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <h2 
+          className={`interactive-text display-m ${nameStyle} ${project.misregister ? 'misregister' : ''}`}
+          style={{
+            '--strike-color': 'var(--riso-red)',
+            '--misregister-color': 'var(--riso-red)'
+          }}
+          data-text={project.name}
+          onClick={onToggle}
+        >
+          {project.name}
+        </h2>
+      </div>
       
       <div className={styles.details}>
         <div className={styles.desc}>

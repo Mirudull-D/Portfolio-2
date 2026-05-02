@@ -20,6 +20,7 @@
 html, body {
   overflow-x: clip;
   scroll-behavior: smooth;
+  scroll-padding-top: 64px;
   font-family: var(--font-mono);
   background-color: var(--bg-light);
   color: var(--bg-dark);

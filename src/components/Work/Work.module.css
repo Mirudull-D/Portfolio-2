@@ -1,7 +1,7 @@
 .work {
   position: relative;
   background-color: var(--bg-dark);
-  color: #FFF;
+  color: #fff;
   padding: 0;
   min-height: 100vh;
 }
@@ -10,9 +10,9 @@
   font-family: var(--font-display);
   font-size: clamp(3rem, 5vw, 6rem);
   letter-spacing: 0.05em;
-  color: #FFF;
+  color: #fff;
   opacity: 0.9;
-  -webkit-text-stroke: 2px #FFF;
+  -webkit-text-stroke: 2px #fff;
   paint-order: stroke fill;
   padding: 48px 48px 32px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -25,11 +25,15 @@
 .block {
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 40px 48px;
+  border-left: 3px solid transparent;
+  padding: 40px 48px 40px 48px;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1),
-              transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  transition:
+    opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1),
+    transform 0.5s cubic-bezier(0.76, 0, 0.24, 1),
+    border-color 0.3s ease,
+    padding-left 0.3s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .block.visible {
@@ -37,15 +41,34 @@
   transform: translateY(0);
 }
 
-.block h2 {
+.block:hover,
+.block.isOpen {
+  border-left-color: var(--riso-cyan);
+  padding-left: 56px;
+}
+
+.rowHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.rowHeader h2 {
   cursor: pointer;
+}
+
+.projectNum {
+  color: #fff;
+  letter-spacing: 0.15em;
+  flex-shrink: 0;
 }
 
 .drawer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.76, 0, 0.24, 1),
-              opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  transition:
+    max-height 0.5s cubic-bezier(0.76, 0, 0.24, 1),
+    opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1);
   opacity: 0;
 }
 
@@ -58,7 +81,7 @@
   padding: 32px;
   margin-top: 24px;
   background: rgba(255, 255, 255, 0.04);
-  border-left: 3px solid var(--riso-cyan);
+  border-left: 3px solid var(--riso-yellow);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -69,7 +92,7 @@
 }
 
 .drawerContent p {
-  color: #FFF;
+  color: #fff;
   opacity: 0.65;
   line-height: 1.7;
 }
@@ -82,7 +105,7 @@
 }
 
 .drawerTags span {
-  color: var(--riso-cyan);
+  color: var(--riso-yellow);
 }
 
 .drawerButtons {
@@ -94,17 +117,19 @@
   display: inline-block;
   padding: 8px 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #FFF;
+  color: #fff;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   background: transparent;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .outlineBtn:hover {
-  background: var(--riso-cyan);
+  background: var(--riso-red);
   color: var(--bg-dark);
 }
 
@@ -117,7 +142,7 @@
 
 .filled {
   font-weight: 900;
-  color: #FFF;
+  color: #fff;
 }
 
 .details {
@@ -133,7 +158,7 @@
 .desc p {
   line-height: 1.7;
   opacity: 0.55;
-  color: #FFF;
+  color: #fff;
 }
 
 .tags {
@@ -154,7 +179,20 @@
   }
 
   .block {
-    padding: 32px 24px;
+    padding: 32px 24px 32px 24px;
+  }
+
+  .block:hover,
+  .block.isOpen {
+    padding-left: 32px;
+  }
+
+  .rowHeader {
+    gap: 16px;
+  }
+
+  .projectNum {
+    opacity: 0.5 !important;
   }
 
   .details {

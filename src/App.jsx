@@ -6,6 +6,7 @@ import Stack from './components/Stack/Stack';
 import Experience from './components/Experience/Experience';
 import Contact from './components/Contact/Contact';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
+import Navbar from './components/Navbar/Navbar';
 import './index.css';
 
 const Grain = () => (
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <Grain />
       <ScrollProgress />
       <main>
