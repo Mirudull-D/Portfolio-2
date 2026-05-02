@@ -22,7 +22,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar} data-navbar="true">
       <div className={styles.logo}>MIRUDULL</div>
 
       <div className={styles.centerLinks}>
