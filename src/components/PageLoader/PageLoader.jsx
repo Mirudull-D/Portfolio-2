@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import styles from './PageLoader.module.css';
 
 const COLORS = ['#4ECDC4', '#FFE66D', '#FF3B3B', '#4CAF50'];
@@ -16,31 +16,28 @@ function getColumnConfig() {
 }
 
 export default function PageLoader({ onDone }) {
-  const overlayRef = useRef(null);
-  const logoRef = useRef(null);
-  const columnRefs = useRef([]);
-  const stripRefs = useRef([]);
-  const animating = useRef(false);
   const [columns, setColumns] = useState(() => getColumnConfig());
   const [hidden, setHidden] = useState(false);
+  const [logoFade, setLogoFade] = useState(false);
+  const columnRefs = useRef([]);
+  const stripRefs = useRef([]);
 
-  const runAnimations = useCallback(() => {
-    columnRefs.current = [];
-    stripRefs.current = [];
+  useEffect(() => {
+    const maxDelay = columns[columns.length - 1].delay;
+    const totalDuration = 600 + maxDelay + 1000;
 
-    if (logoRef.current) {
-      logoRef.current.animate(
-        [{ opacity: 1 }, { opacity: 0 }],
-        { duration: 200, delay: 400, fill: 'forwards' }
-      );
-    }
+    const timers = [];
 
-    columns.forEach((col) => {
-      const colEl = columnRefs.current[col.index];
-      const stripEl = stripRefs.current[col.index];
-      const drift = col.index % 2 === 0 ? '3px' : '-3px';
+    const logoFadeTimer = setTimeout(() => setLogoFade(true), 400);
 
-      if (colEl) {
+    const startTimeout = setTimeout(() => {
+      columns.forEach((col) => {
+        const colEl = columnRefs.current[col.index];
+        const stripEl = stripRefs.current[col.index];
+        if (!colEl || !stripEl) return;
+
+        const drift = col.index % 2 === 0 ? '3px' : '-3px';
+
         colEl.animate(
           [
             { transform: 'translateY(0) translateX(0)' },
@@ -48,14 +45,12 @@ export default function PageLoader({ onDone }) {
           ],
           {
             duration: 1000,
-            delay: 600 + col.delay,
+            delay: col.delay,
             easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
             fill: 'forwards',
           }
         );
-      }
 
-      if (stripEl) {
         stripEl.animate(
           [
             { height: '4px', bottom: '0' },
@@ -65,57 +60,53 @@ export default function PageLoader({ onDone }) {
           ],
           {
             duration: 1000,
-            delay: 600 + col.delay,
+            delay: col.delay,
             easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
             fill: 'forwards',
           }
         );
-      }
-    });
+      });
+    }, 600);
 
-    const maxDelay = columns[columns.length - 1].delay;
-    const totalDuration = 600 + maxDelay + 1000;
-    return totalDuration;
-  }, [columns]);
+    timers.push(logoFadeTimer, startTimeout);
 
-  useEffect(() => {
-    if (!overlayRef.current || animating.current) return;
-
-    animating.current = true;
-    const wait = runAnimations();
-    const hideTimer = setTimeout(() => setHidden(true), wait);
-    const timer = setTimeout(() => onDone(), wait + 100);
+    const hideTimer = setTimeout(() => setHidden(true), 600 + totalDuration);
+    const doneTimer = setTimeout(() => onDone(), 600 + totalDuration + 100);
+    timers.push(hideTimer, doneTimer);
 
     return () => {
-      clearTimeout(hideTimer);
-      clearTimeout(timer);
+      timers.forEach(clearTimeout);
     };
-  }, [onDone, runAnimations]);
+  }, [columns, onDone]);
 
   useEffect(() => {
     const handleResize = () => {
-      if (!animating.current) setColumns(getColumnConfig());
+      setColumns(getColumnConfig());
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const setColumnRef = useCallback((el, index) => {
+    columnRefs.current[index] = el;
+  }, []);
+
+  const setStripRef = useCallback((el, index) => {
+    stripRefs.current[index] = el;
+  }, []);
+
   return (
-    <div ref={overlayRef} className={`${styles.overlay} ${hidden ? styles.hidden : ''}`}>
-      <div ref={logoRef} className={styles.logo}>MIRUDULL</div>
+    <div className={`${styles.overlay} ${hidden ? styles.hidden : ''}`}>
+      <div className={`${styles.logo} ${logoFade ? styles.logoFade : ''}`}>MIRUDULL</div>
       <div className={styles.columns}>
         {columns.map((col) => (
           <div
             key={col.index}
-            ref={(el) => {
-              columnRefs.current[col.index] = el;
-            }}
+            ref={(el) => setColumnRef(el, col.index)}
             className={styles.column}
           >
             <div
-              ref={(el) => {
-                stripRefs.current[col.index] = el;
-              }}
+              ref={(el) => setStripRef(el, col.index)}
               className={styles.strip}
               style={{ backgroundColor: col.color }}
             />

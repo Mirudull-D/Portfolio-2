@@ -123,7 +123,7 @@
     align-items: center;
     justify-content: center;
     gap: 40px;
-    z-index: 10000;
+    z-index: 10003;
   }
 
   .mobileMenuOpen {
@@ -136,11 +136,30 @@
     color: #FFF;
     letter-spacing: 0.05em;
     opacity: 0.8;
+    position: relative;
     transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .mobileNavLink::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--riso-cyan);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
   }
 
   .mobileNavLink:hover {
     opacity: 1;
     transform: translateX(8px);
+  }
+
+  .mobileNavLink:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 }

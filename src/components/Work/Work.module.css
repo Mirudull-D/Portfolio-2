@@ -62,6 +62,12 @@
   flex-shrink: 0;
 }
 
+.projectName {
+  cursor: pointer;
+  color: #FFF;
+  font-weight: 900;
+}
+
 .filled {
   font-weight: 900;
   color: #FFF;
@@ -154,27 +160,31 @@
 
 .closeBtn {
   position: absolute;
-  top: 0;
-  right: 0;
-  padding: 24px;
-  background: transparent;
-  border: none;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
   color: #FFF;
-  font-size: 0.72rem;
-  font-family: var(--font-mono);
-  letter-spacing: 0.1em;
-  opacity: 0.5;
+  font-size: 1rem;
   cursor: pointer;
-  transition: opacity 0.2s ease;
-  line-height: 1;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
 }
 
 .closeBtn:hover {
-  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .panelHeader {
-  padding: 64px 32px 24px;
+  padding: 80px 32px 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .panelName {
@@ -189,8 +199,15 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
   display: block;
+}
+
+.panelDesc {
+  padding: 32px 32px 0;
+  color: #FFF;
+  opacity: 0.7;
+  line-height: 1.8;
 }
 
 .panelStack {
@@ -289,7 +306,16 @@
   }
 
   .panelHeader {
-    padding: 64px 20px 16px;
+    padding: 80px 20px 24px;
+  }
+
+  .panelName {
+    max-width: calc(100% - 48px);
+  }
+
+  .closeBtn {
+    top: 16px;
+    right: 16px;
   }
 
   .panelStack {

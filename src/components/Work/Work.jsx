@@ -7,7 +7,6 @@ const projects = [
     name: 'SYNTHESIS',
     desc: 'A decentralized protocol for verifiable AI model training. Reduces compute overhead by 40% while maintaining cryptographic proofs of work.',
     tags: ['React', 'Solidity', 'WebGL', 'TypeScript'],
-    misregister: false,
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -15,7 +14,6 @@ const projects = [
     name: 'NEXUS BROWSER',
     desc: 'An experimental spatial interface for navigating dense information graphs. Built entirely on the Canvas API with a custom physics engine.',
     tags: ['Vite', 'Canvas API', 'Rust', 'WASM'],
-    misregister: false,
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -23,7 +21,6 @@ const projects = [
     name: 'ECHO CHAMBER',
     desc: 'Audio analysis tool for acoustic room modeling. Features real-time spectral decomposition and impulse response generation.',
     tags: ['Next.js', 'WebAudio API', 'Python', 'FastAPI'],
-    misregister: true,
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -31,7 +28,6 @@ const projects = [
     name: 'VANTAGE POINT',
     desc: 'A lightweight observability dashboard for distributed microservices. Aggregates logs, metrics, and traces into a single pane of glass.',
     tags: ['Vue', 'Go', 'Prometheus', 'Redis'],
-    misregister: false,
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -39,7 +35,6 @@ const projects = [
     name: 'CHRONOS',
     desc: 'Time-series database visualization engine capable of rendering millions of data points smoothly without downsampling.',
     tags: ['React', 'D3.js', 'Java', 'Spring Boot'],
-    misregister: false,
     liveUrl: '#',
     githubUrl: '#'
   },
@@ -47,7 +42,6 @@ const projects = [
     name: 'KINETIC',
     desc: 'Open-source animation library for performant micro-interactions. Used by over 10,000 developers worldwide.',
     tags: ['Vanilla JS', 'CSS', 'Rollup', 'Jest'],
-    misregister: false,
     liveUrl: '#',
     githubUrl: '#'
   }
@@ -56,9 +50,6 @@ const projects = [
 const ProjectBlock = ({ project, index, isActive, onClick }) => {
   const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
   
-  const isEven = index % 2 === 1;
-  const nameStyle = isEven ? styles.filled : 'outlined-text';
-
   return (
     <article 
       ref={ref}
@@ -70,12 +61,7 @@ const ProjectBlock = ({ project, index, isActive, onClick }) => {
           {String(index + 1).padStart(2, '0')}
         </span>
         <h2 
-          className={`interactive-text display-m ${nameStyle} ${project.misregister ? 'misregister' : ''}`}
-          style={{
-            '--strike-color': 'var(--riso-red)',
-            '--misregister-color': 'var(--riso-red)'
-          }}
-          data-text={project.name}
+          className={`${styles.projectName} display-m`}
           onClick={() => onClick(index)}
         >
           {project.name}
@@ -99,8 +85,6 @@ const ProjectBlock = ({ project, index, isActive, onClick }) => {
 export default function Work() {
   const [activeIndex, setActiveIndex] = useState(null);
   const [panelVisible, setPanelVisible] = useState(false);
-  const overlayRef = useRef(null);
-  const panelRef = useRef(null);
 
   const openPanel = (index) => {
     setActiveIndex(index);
@@ -157,14 +141,10 @@ export default function Work() {
       {activeIndex !== null && project && (
         <>
           <div 
-            ref={overlayRef}
             className={`${styles.overlay} ${panelVisible ? styles.overlayVisible : ''}`} 
             onClick={closePanel} 
           />
-          <div 
-            ref={panelRef}
-            className={`${styles.panel} ${panelVisible ? styles.panelOpen : ''}`}
-          >
+          <div className={`${styles.panel} ${panelVisible ? styles.panelOpen : ''}`}>
             <button className={styles.closeBtn} onClick={closePanel} aria-label="Close panel">
               ×
             </button>
@@ -182,16 +162,18 @@ export default function Work() {
                 className={styles.panelImage}
               />
 
-              <p className="body-text" style={{ opacity: 0.7, lineHeight: 1.8 }}>
-                {project.desc}
-              </p>
+              <div className={styles.panelDescWrap}>
+                <p className={styles.panelDesc}>
+                  {project.desc}
+                </p>
 
-              <div className={styles.panelStack}>
-                <div className="label-text" style={{ opacity: 0.3, marginBottom: 12 }}>STACK</div>
-                <div className={styles.panelTags}>
-                  {project.tags.map(tag => (
-                    <span key={tag} className="label-text">{tag}</span>
-                  ))}
+                <div className={styles.panelStack}>
+                  <div className="label-text" style={{ opacity: 0.3, marginBottom: 12 }}>STACK</div>
+                  <div className={styles.panelTags}>
+                    {project.tags.map(tag => (
+                      <span key={tag} className="label-text">{tag}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
