@@ -7,6 +7,7 @@ const experiences = [
     company: 'CEXNEA SYSTEMS',
     role: 'FULLSTACK DEVELOPER INTERN',
     duration: 'MAR 2025 — PRESENT',
+    year: '2025',
     description: 'Building production full stack systems at Cexnea Systems across frontend and backend.',
     tags: ['REACT', 'NODE', 'FASTAPI', 'POSTGRESQL', 'REST APIs'],
     color: 'var(--riso-cyan)'
@@ -15,6 +16,7 @@ const experiences = [
     company: 'SKETCH SRM',
     role: 'R&D LEAD',
     duration: 'FEB 2024 — PRESENT',
+    year: '2024',
     description: 'Leading research initiatives and mentoring students in web technologies at SRM Institute.',
     tags: ['HTML', 'CSS', 'JAVASCRIPT', 'REACT', 'TECHNICAL MENTORING'],
     color: 'var(--riso-red)'
@@ -26,15 +28,9 @@ export default function Experience() {
 
   return (
     <section className={styles.experience} ref={ref} id="experience">
+      <div className={styles.watermark}>EXPERIENCE</div>
       <div className={styles.header}>
-        <h2 
-          className={`${styles.bigLabel} misregister`}
-          data-text="EXPERIENCE"
-          style={{ '--misregister-color': 'var(--riso-cyan)' }}
-        >
-          EXPERIENCE
-        </h2>
-        <div className={styles.rightLabel}>02 ROLES · TIMELINE</div>
+        <div className={styles.label}>EXPERIENCE</div>
       </div>
 
       <div className={styles.timelineContainer}>
@@ -52,6 +48,7 @@ export default function Experience() {
                 <div className={styles.nodePulse} style={{ backgroundColor: exp.color }} />
               )}
             </div>
+            <div className={styles.yearBadge} style={{ color: exp.color }}>{exp.year}</div>
             
             <div className={styles.content}>
               <div className={styles.metaRow}>

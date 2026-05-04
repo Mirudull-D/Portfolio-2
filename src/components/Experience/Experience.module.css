@@ -2,39 +2,52 @@
   position: relative;
   background-color: var(--bg-light);
   color: var(--bg-dark);
-  padding: 160px 48px 200px; 
-  min-height: 100vh;
+  padding: 40px 48px 30px;
+  height: 100vh;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 100px;
+  align-items: center;
+  padding: 0 0 12px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
-  padding-bottom: 30px;
+  margin-bottom: 20px;
 }
 
-.bigLabel {
+.label {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 10vw, 12rem);
-  line-height: 0.8;
-  margin: 0;
+  font-size: clamp(3rem, 5vw, 6rem);
+  letter-spacing: 0.05em;
+  color: var(--bg-dark);
+  opacity: 0.9;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 48px;
+  transform: translateY(-50%) rotate(-90deg);
+  font-family: var(--font-display);
+  font-size: clamp(12vw, 18vw, 20vw);
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+  opacity: 0.06;
+  line-height: 0.85;
+  pointer-events: none;
+  z-index: 0;
+  transform-origin: center;
 }
 
 .rightLabel {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  opacity: 0.5;
-  margin-bottom: 10px;
+  display: none;
 }
 
 .timelineContainer {
   position: relative;
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 0 100px 50px; /* Added bottom padding */
+  padding: 0 0 20px 80px;
 }
 
 .timelineLine {
@@ -56,7 +69,7 @@
 
 .timelineItem {
   position: relative;
-  margin-bottom: 120px; /* Increased margin between items */
+  margin-bottom: 50px;
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1);
@@ -69,7 +82,7 @@
 
 .timelineNode {
   position: absolute;
-  left: -56px;
+  left: -84px;
   top: 0;
   width: 14px;
   height: 14px;
@@ -77,6 +90,18 @@
   align-items: center;
   justify-content: center;
   z-index: 1;
+}
+
+.yearBadge {
+  position: absolute;
+  left: -130px;
+  top: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  white-space: nowrap;
 }
 
 .nodeCore {
@@ -103,13 +128,13 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 8px;
 }
 
 .metaRow {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .duration {
@@ -131,7 +156,7 @@
 
 .companyName {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   line-height: 0.9;
   text-transform: uppercase;
   color: var(--bg-dark);
@@ -139,15 +164,15 @@
 
 .roleTitle {
   font-family: var(--font-mono);
-  font-size: 1.1rem;
+  font-size: 1rem;
   opacity: 0.8;
   font-weight: bold;
 }
 
 .description {
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  line-height: 1.5;
   opacity: 0.6;
   max-width: 600px;
 }
@@ -155,8 +180,8 @@
 .tagStrip {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 6px;
+  margin-top: 6px;
 }
 
 .tag {
@@ -165,25 +190,34 @@
   letter-spacing: 0.1em;
   opacity: 0.4;
   background: rgba(0, 0, 0, 0.05);
-  padding: 4px 8px;
+  padding: 3px 8px;
   border-radius: 4px;
 }
 
 @media (max-width: 768px) {
   .experience {
-    padding: 80px 24px 120px;
+    padding: 40px 24px 30px;
+  }
+  
+  .watermark {
+    left: 24px;
   }
   
   .timelineContainer {
-    padding-left: 30px;
+    padding-left: 50px;
   }
   
   .timelineNode {
-    left: -36px;
+    left: -56px;
+  }
+  
+  .yearBadge {
+    left: -80px;
+    font-size: 0.7rem;
   }
   
   .companyName {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 3rem);
   }
   
   .roleTitle {

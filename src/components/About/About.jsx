@@ -79,39 +79,37 @@ export default function About() {
 
       </div>
 
-      <div className={`${styles.statsRow} ${isVisible ? styles.statsVisible : ''}`}>
-        <div className={styles.stat}>
-          <div className={styles.statNumber}>
-            <Counter target={3} suffix="+" />
+      <div className={`${styles.contribRow} ${isVisible ? styles.contribVisible : ''}`} style={{ marginTop: '4rem', display: 'flex', flexDirection: 'row', gap: '2rem', justifyContent: 'center', alignItems: 'flex-start', flexWrap: 'wrap', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s', opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(20px)' }}>
+        
+        {/* Left: Wide Calendar - 80% */}
+        <div style={{ flex: '4', minWidth: '400px' }}>
+          <div style={{ padding: '2rem', background: 'var(--bg-secondary, rgba(255,255,255,0.02))', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <h3 className="body-text" style={{ marginBottom: '1.5rem', textAlign: 'center', opacity: 0.8, letterSpacing: '0.1em', fontSize: '1.2rem' }}>CONTRIBUTIONS</h3>
+            <div style={{ width: '100%', overflowX: 'auto', display: 'flex', justifyContent: 'center' }}>
+              <GitHubCalendar 
+                username="Mirudull-D" 
+                colorScheme="light"
+                blockSize={14}
+                blockMargin={5}
+                fontSize={14}
+              />
+            </div>
           </div>
-          <div className="label-text" style={{ opacity: 0.5 }}>YEARS EXPERIENCE</div>
         </div>
-        <div className={styles.stat}>
-          <div className={styles.statNumber}>
-            <Counter target={12} suffix="+" />
-          </div>
-          <div className="label-text" style={{ opacity: 0.5 }}>PROJECTS BUILT</div>
-        </div>
-        <div className={styles.stat}>
-          <div className={styles.statNumber}>
-            <Counter target={2} />
-          </div>
-          <div className="label-text" style={{ opacity: 0.5 }}>ROLES HELD</div>
-        </div>
-      </div>
 
-      <div className={`${styles.githubWrapper} ${isVisible ? styles.visible : ''}`} style={{ marginTop: '6rem', display: 'flex', flexDirection: 'row', gap: '4rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s', opacity: isVisible ? 1 : 0, transform: isVisible ? 'translateY(0)' : 'translateY(20px)' }}>
-
-        <div style={{ flex: '1', minWidth: '600px', padding: '3rem', background: 'var(--bg-secondary, rgba(255,255,255,0.02))', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.05)' }}>
-          <h3 className="body-text" style={{ marginBottom: '2.5rem', textAlign: 'center', opacity: 0.8, letterSpacing: '0.1em', fontSize: '1.5rem' }}>CONTRIBUTIONS</h3>
-          <div style={{ width: '100%', overflowX: 'auto', display: 'flex', justifyContent: 'center' }}>
-            <GitHubCalendar 
-              username="Mirudull-D" 
-              colorScheme="light"
-              blockSize={16}
-              blockMargin={6}
-              fontSize={16}
-            />
+        {/* Right: Stats - 20% */}
+        <div style={{ flex: '1', minWidth: '200px', maxWidth: '300px', padding: '2rem', background: 'var(--bg-secondary, rgba(255,255,255,0.02))', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div className={styles.stat}>
+            <div className={styles.statNumber}>
+              <Counter target={1} suffix="+" />
+            </div>
+            <div className="label-text" style={{ opacity: 0.5 }}>YEARS EXPERIENCE</div>
+          </div>
+          <div className={styles.stat}>
+            <div className={styles.statNumber}>
+              <Counter target={12} suffix="+" />
+            </div>
+            <div className="label-text" style={{ opacity: 0.5 }}>PROJECTS BUILT</div>
           </div>
         </div>
 
