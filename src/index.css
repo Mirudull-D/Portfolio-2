@@ -25,6 +25,13 @@ html, body {
   background-color: var(--bg-light);
   color: var(--bg-dark);
   cursor: default;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  display: none;
 }
 
 /* Grain Overlay */

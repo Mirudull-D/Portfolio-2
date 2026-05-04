@@ -7,13 +7,13 @@ export default function Contact() {
       <div className={styles.container}>
         <div className={styles.mainContent}>
           <div className={styles.textSide}>
-            <h2 className={styles.bigTitle}>
-              LET'S
-              <br />
-              BUILD
-              <br />
-              SOMETHING
-            </h2>
+<h2 className={styles.bigTitle}>
+  <span className={styles.misregister} data-text="LET'S">LET'S</span>
+  <br />
+  <span className={styles.misregister} data-text="BUILD">BUILD</span>
+  <br />
+  <span className={styles.misregister} data-text="SOMETHING">SOMETHING</span>
+</h2>
             <p className={styles.subText}>
               I'm always open to new opportunities and collaborations. 
               Drop a message and let's turn your idea into reality.

@@ -34,6 +34,25 @@
   margin-bottom: 40px;
 }
 
+.misregister {
+  position: relative;
+  display: inline-block;
+}
+
+.misregister::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  color: var(--riso-cyan);
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-size: inherit;
+  line-height: inherit;
+}
+
 .subText {
   font-family: var(--font-mono);
   font-size: 1.1rem;
@@ -46,21 +65,21 @@
   flex: 1;
   max-width: 600px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 60px;
+  padding: 30px;
   background: rgba(255, 255, 255, 0.02);
 }
 
 .formHeading {
   font-family: var(--font-display);
-  font-size: 2.5rem;
-  margin-bottom: 40px;
+  font-size: 2rem;
+  margin-bottom: 30px;
   letter-spacing: 0.05em;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .inputGroup {
@@ -79,16 +98,16 @@
 .input, .textarea {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 15px;
+  padding: 12px;
   color: #FFF;
   font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 0.95rem;
   width: 100%;
   transition: border-color 0.3s ease;
 }
 
 .textarea {
-  min-height: 150px;
+  min-height: 100px;
   resize: vertical;
 }
 
@@ -102,13 +121,13 @@
 }
 
 .submitBtn {
-  margin-top: 20px;
+  margin-top: 16px;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #FFF;
-  padding: 20px;
+  padding: 16px;
   font-family: var(--font-mono);
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   cursor: pointer;
