@@ -1,0 +1,49 @@
+.electricWrapper {
+  position: relative;
+  border-radius: 14px;
+  padding: 6px;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    var(--color-1) 15%,
+    var(--color-2) 30%,
+    var(--color-3) 45%,
+    transparent 60%,
+    transparent 100%
+  );
+  animation: rotateGlow 3s linear infinite;
+  z-index: -1;
+  filter: blur(4px) brightness(1.2);
+}
+
+.content {
+  position: relative;
+  background: var(--bg-light, #f8f8f8);
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+}
+
+@keyframes rotateGlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

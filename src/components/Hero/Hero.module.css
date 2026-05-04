@@ -1,66 +1,69 @@
 .hero {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  background-color: var(--bg-light);
+  color: var(--bg-dark);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-light);
-  color: var(--bg-dark);
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  pointer-events: none; /* Let clicks pass to the Squares background */
 }
 
 .label {
-  position: absolute;
-  top: 48px;
-  left: 48px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.5;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  margin-bottom: 32px;
 }
 
 .monument {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  gap: 0;
 }
 
-.line {
-  line-height: 0.85;
-  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-  transform: translateY(20px);
-  transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1),
-              transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+.lineWrapper {
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 1s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-.line.revealed {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+.revealed {
+  opacity: 1;
   transform: translateY(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .line {
-    clip-path: none;
-    transform: none;
-  }
+.line {
+  margin: 0;
+  line-height: 0.85;
 }
 
 .subtitle {
-  margin-top: 32px;
+  margin-top: 48px;
+  max-width: 400px;
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.6s,
-              transform 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.6s;
-  text-align: center;
-  padding: 0 20px;
-  max-width: 100vw;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.6s;
 }
 
-.subtitle.subtitleRevealed {
-  opacity: 0.6;
+.subtitleRevealed {
+  opacity: 1;
   transform: translateY(0);
 }
 
@@ -69,24 +72,79 @@
   bottom: 48px;
   right: 48px;
   font-family: var(--font-display);
-  font-size: clamp(3vw, 4vw, 5vw);
-  -webkit-text-stroke: 1px currentColor;
-  color: transparent;
-  opacity: 0.08;
-  line-height: 1;
+  font-size: 4rem;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 1s cubic-bezier(0.76, 0, 0.24, 1) 0.8s;
 }
 
+.year.revealed {
+  opacity: 0.1;
+  transform: translateX(0);
+}
+
+/* Scroll Indicator */
 .scrollIndicator {
   position: absolute;
-  bottom: 48px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  animation: pulse 2s infinite ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+  opacity: 0.5;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.7; }
+.mouse {
+  width: 20px;
+  height: 35px;
+  border: 2px solid #FFF;
+  border-radius: 10px;
+  position: relative;
+}
+
+.wheel {
+  width: 2px;
+  height: 6px;
+  background: #FFF;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 2s infinite;
+}
+
+@keyframes scrollWheel {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  100% { transform: translate(-50%, 15px); opacity: 0; }
+}
+
+.arrows span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid #FFF;
+  border-right: 2px solid #FFF;
+  transform: rotate(45deg);
+  margin: -5px;
+  animation: arrowDown 2s infinite;
+}
+
+.arrows span:nth-child(2) { animation-delay: -0.2s; }
+.arrows span:nth-child(3) { animation-delay: -0.4s; }
+
+@keyframes arrowDown {
+  0% { opacity: 0; transform: rotate(45deg) translate(-10px, -10px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(45deg) translate(10px, 10px); }
+}
+
+@media (max-width: 768px) {
+  .year {
+    right: 24px;
+    bottom: 24px;
+    font-size: 3rem;
+  }
 }

@@ -7,6 +7,7 @@ import Experience from "./components/Experience/Experience";
 import Contact from "./components/Contact/Contact";
 import ScrollProgress from "./components/ScrollProgress/ScrollProgress";
 import Navbar from "./components/Navbar/Navbar";
+import Mascot from "./components/Mascot/Mascot";
 import PageLoader from "./components/PageLoader/PageLoader";
 import Terminal from "./components/Terminal/Terminal";
 import IdleDim from "./components/EasterEggs/IdleDim";
@@ -179,7 +180,8 @@ function App() {
     });
 
     if (navbarRef.current) {
-      navbarRef.current.style.transition = "transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)";
+      navbarRef.current.style.transition =
+        "transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1)";
       navbarRef.current.style.transform = "rotate(15deg)";
     }
 
@@ -203,7 +205,8 @@ function App() {
     });
 
     if (navbarRef.current) {
-      navbarRef.current.style.transition = "transform 800ms cubic-bezier(0.76, 0, 0.24, 1)";
+      navbarRef.current.style.transition =
+        "transform 800ms cubic-bezier(0.76, 0, 0.24, 1)";
       navbarRef.current.style.transform = "rotate(0deg)";
     }
 
@@ -277,6 +280,8 @@ function App() {
       {!loading && <IdleDim />}
       <Rain active={rainActive} />
       <Navbar />
+    
+      <Mascot />
       <Grain />
       <ScrollProgress />
       <main data-main="true">
@@ -289,13 +294,15 @@ function App() {
       </main>
 
       {broken404 && (
-        <div style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 99999,
-        }}>
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 99999,
+          }}
+        >
           <button
             onClick={fix404}
             style={{

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
+import ElectricBorder from '../ElectricBorder/ElectricBorder';
+import heroImg from '../../assets/hero.png';
 import styles from './Process.module.css';
 
 const phases = [
@@ -51,6 +53,23 @@ const PhaseBlock = ({ phase, index }) => {
 
       <div className={styles.phaseDesc}>
         <p className="body-text">{phase.desc}</p>
+        {phase.name === 'MAKE' && (
+          <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }} className="fade-in-up">
+            <ElectricBorder>
+              <img 
+                src={heroImg} 
+                alt="Building process" 
+                style={{ 
+                  width: '100%', 
+                  maxWidth: '400px', 
+                  display: 'block', 
+                  borderRadius: '8px',
+                  objectFit: 'cover'
+                }} 
+              />
+            </ElectricBorder>
+          </div>
+        )}
       </div>
     </div>
   );

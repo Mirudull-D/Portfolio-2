@@ -2,55 +2,75 @@ import { useState, useEffect } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './Experience.module.css';
 
-export default function Experience() {
-  const [ref, isVisible] = useScrollReveal({ threshold: 0.2 });
-  const [contentShow, setContentShow] = useState(false);
+const experiences = [
+  {
+    company: 'CEXNEA SYSTEMS',
+    role: 'FULLSTACK DEVELOPER INTERN',
+    duration: 'MAR 2025 — PRESENT',
+    description: 'Building production full stack systems at Cexnea Systems across frontend and backend.',
+    tags: ['REACT', 'NODE', 'FASTAPI', 'POSTGRESQL', 'REST APIs'],
+    color: 'var(--riso-cyan)'
+  },
+  {
+    company: 'SKETCH SRM',
+    role: 'R&D LEAD',
+    duration: 'FEB 2024 — PRESENT',
+    description: 'Leading research initiatives and mentoring students in web technologies at SRM Institute.',
+    tags: ['HTML', 'CSS', 'JAVASCRIPT', 'REACT', 'TECHNICAL MENTORING'],
+    color: 'var(--riso-red)'
+  }
+];
 
-  useEffect(() => {
-    if (!isVisible) return;
-    const timer = setTimeout(() => setContentShow(true), 100);
-    return () => clearTimeout(timer);
-  }, [isVisible]);
+export default function Experience() {
+  const [ref, isVisible] = useScrollReveal({ threshold: 0.1 });
 
   return (
     <section className={styles.experience} ref={ref} id="experience">
       <div className={styles.header}>
-        <div className={styles.label}>EXPERIENCE</div>
-        <div className={styles.rightLabel}>02 ROLES · ONGOING</div>
+        <h2 
+          className={`${styles.bigLabel} misregister`}
+          data-text="EXPERIENCE"
+          style={{ '--misregister-color': 'var(--riso-cyan)' }}
+        >
+          EXPERIENCE
+        </h2>
+        <div className={styles.rightLabel}>02 ROLES · TIMELINE</div>
       </div>
 
-      <div className={styles.body}>
-        <div className={`${styles.expLeft} ${contentShow ? styles.fadeUp : ''}`}>
-          <h2 className={styles.companyName}>
-            SKETCH
-            <br />
-            SRM
-          </h2>
-          <div className={styles.roleTitle}>R&D LEAD</div>
-          <div className={styles.duration}>FEB 2024 — PRESENT</div>
-          <p className={styles.description}>
-            Leading research initiatives and mentoring students in web technologies at SRM Institute.
-          </p>
-          <div className={`${styles.tagStrip} ${styles.redTags}`}>
-            HTML · CSS · JAVASCRIPT · REACT · TECHNICAL MENTORING
+      <div className={styles.timelineContainer}>
+        <div className={`${styles.timelineLine} ${isVisible ? styles.lineGrow : ''}`} />
+        
+        {experiences.map((exp, index) => (
+          <div 
+            key={exp.company} 
+            className={`${styles.timelineItem} ${isVisible ? styles.fadeUp : ''}`}
+            style={{ transitionDelay: `${index * 0.2}s` }}
+          >
+            <div className={styles.timelineNode}>
+              <div className={styles.nodeCore} style={{ backgroundColor: exp.color }} />
+              {exp.duration.includes('PRESENT') && (
+                <div className={styles.nodePulse} style={{ backgroundColor: exp.color }} />
+              )}
+            </div>
+            
+            <div className={styles.content}>
+              <div className={styles.metaRow}>
+                <div className={styles.duration} style={{ color: exp.color }}>{exp.duration}</div>
+                {exp.duration.includes('PRESENT') && (
+                  <span className={styles.presentBadge} style={{ borderColor: exp.color, color: exp.color }}>ACTIVE</span>
+                )}
+              </div>
+              <h2 className={styles.companyName}>{exp.company}</h2>
+              <div className={styles.roleTitle}>{exp.role}</div>
+              <p className={styles.description}>{exp.description}</p>
+              <div className={styles.tagStrip}>
+                {exp.tags.map(tag => (
+                  <span key={tag} className={styles.tag}>{tag}</span>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className={`${styles.expRight} ${contentShow ? styles.fadeUp : ''}`}>
-          <h2 className={`${styles.companyName} ${styles.outlined}`}>
-            CEXNEA
-            <br />
-            SYSTEMS
-          </h2>
-          <div className={styles.roleTitle}>FULLSTACK DEVELOPER INTERN</div>
-          <div className={styles.duration}>MAR 2025 — PRESENT</div>
-          <p className={styles.description}>
-            Building production full stack systems at Cexnea Systems across frontend and backend.
-          </p>
-          <div className={`${styles.tagStrip} ${styles.cyanTags}`}>
-            REACT · NODE · FASTAPI · POSTGRESQL · REST APIs
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );

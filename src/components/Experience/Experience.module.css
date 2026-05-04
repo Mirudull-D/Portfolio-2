@@ -1,183 +1,193 @@
 .experience {
-  background: var(--bg-light);
   position: relative;
-  overflow: hidden;
+  background-color: var(--bg-light);
+  color: var(--bg-dark);
+  padding: 160px 48px 200px; 
   min-height: 100vh;
-  max-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 48px 48px 24px;
-  background: var(--bg-light);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  flex-shrink: 0;
+  align-items: flex-end;
+  margin-bottom: 100px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 30px;
 }
 
-.label {
+.bigLabel {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 5vw, 6rem);
-  letter-spacing: 0.05em;
-  color: var(--bg-dark);
-  opacity: 0.9;
-  -webkit-text-stroke: 2px var(--bg-dark);
-  paint-order: stroke fill;
+  font-size: clamp(4rem, 10vw, 12rem);
+  line-height: 0.8;
+  margin: 0;
 }
 
 .rightLabel {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  opacity: 0.3;
-  color: var(--bg-dark);
-}
-
-.body {
-  display: flex;
-  position: relative;
-  align-items: center;
-  flex: 1;
-  overflow: hidden;
-}
-
-.expLeft {
-  width: 50%;
-  padding: 48px;
-  position: relative;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1),
-              transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.expLeft.fadeUp {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.expRight {
-  width: 50%;
-  padding: 48px;
-  position: relative;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1),
-              transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.expRight.fadeUp {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .expLeft, .expRight {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.companyName {
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 8vw, 8vw);
-  line-height: 0.9;
-  color: var(--bg-dark);
-}
-
-.companyName.outlined {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--bg-dark);
-}
-
-.roleTitle {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  text-transform: uppercase;
   letter-spacing: 0.15em;
   opacity: 0.5;
-  color: var(--bg-dark);
-  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.timelineContainer {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 0 100px 50px; /* Added bottom padding */
+}
+
+.timelineLine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--bg-dark);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1.5s cubic-bezier(0.76, 0, 0.24, 1);
+  opacity: 0.1;
+}
+
+.lineGrow {
+  transform: scaleY(1);
+}
+
+.timelineItem {
+  position: relative;
+  margin-bottom: 120px; /* Increased margin between items */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.fadeUp {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timelineNode {
+  position: absolute;
+  left: -56px;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.nodeCore {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.nodePulse {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  70% { transform: scale(2.5); opacity: 0; }
+  100% { transform: scale(0.8); opacity: 0; }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .duration {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  opacity: 0.35;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+.presentBadge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  padding: 2px 8px;
+  border: 1px solid;
+  border-radius: 10px;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+}
+
+.companyName {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 0.9;
+  text-transform: uppercase;
   color: var(--bg-dark);
-  margin-top: 6px;
+}
+
+.roleTitle {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  opacity: 0.8;
+  font-weight: bold;
 }
 
 .description {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
-  line-height: 1.7;
-  opacity: 0.65;
-  color: var(--bg-dark);
-  margin-top: 16px;
-  max-width: 320px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.6;
+  max-width: 600px;
 }
 
 .tagStrip {
-  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tag {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  opacity: 0.45;
-}
-
-.redTags {
-  color: var(--riso-red);
-}
-
-.cyanTags {
-  color: var(--riso-cyan);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  opacity: 0.4;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 4px 8px;
+  border-radius: 4px;
 }
 
 @media (max-width: 768px) {
   .experience {
-    min-height: auto;
-    max-height: none;
+    padding: 80px 24px 120px;
   }
-
-  .header {
-    padding: 48px 24px 24px;
+  
+  .timelineContainer {
+    padding-left: 30px;
   }
-
-  .label {
-    font-size: clamp(2rem, 8vw, 3.5rem);
+  
+  .timelineNode {
+    left: -36px;
   }
-
-  .body {
-    flex-direction: column;
-  }
-
-  .expLeft {
-    width: 100%;
-    padding: 48px 24px 24px;
-  }
-
-  .expLeft::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px;
-    background: rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
-  }
-
-  .expRight {
-    width: 100%;
-    padding: 24px 24px 80px;
-  }
-
+  
   .companyName {
-    font-size: clamp(3rem, 12vw, 5rem);
+    font-size: 2.5rem;
   }
-
-  .description {
-    max-width: 100%;
+  
+  .roleTitle {
+    font-size: 0.9rem;
   }
 }
+
