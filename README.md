@@ -1,16 +1,41 @@
-# React + Vite
+# Mirudull Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio with Riso print-inspired design, blending retro print textures and digital glitch interactions.
 
-Currently, two official plugins are available:
+## Design Theme
+- **Colors**: Riso cyan/yellow/red/green, light parchment (`#F0EDE6`) / deep dark (`#0E0E0E`) bases
+- **Typography**: `Bebas Neue` (display) + `Space Mono` (monospace)
+- **Texture**: Fixed grain overlay for tactile Riso print feel
+- **Interactions**: Slide-strike hovers, misregistration effects, keyboard easter eggs (`INVERT`, `404`, `RAIN`)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Project Structure
+```
+src/
+├── main.jsx                # Entry point
+├── App.jsx                 # Main app
+├── index.css               # Global styles + theme vars
+├── assets/                 # Static assets
+├── hooks/                  # Custom hooks (useScrollReveal)
+└── components/             # UI components (Hero, About, Work, Stack, EasterEggs, etc.)
+```
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
+Node.js (v18+), npm
 
-## Expanding the ESLint configuration
+### Install
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Run
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Preview build |
+
+## Tech Stack
+React 19, Vite 8, CSS Modules, react-github-calendar
