@@ -37,5 +37,6 @@ npm install
 | `npm run lint` | Run ESLint |
 | `npm run preview` | Preview build |
 
+
 ## Tech Stack
 React 19, Vite 8, CSS Modules, react-github-calendar
